@@ -1,93 +1,102 @@
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
+import { useState, useEffect } from "react"
+import Image from "next/image"
 import { Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
 
 const navLinks = [
-  { label: "Inicio", href: "#inicio" },
-  { label: "Soluciones", href: "#soluciones" },
-  { label: "Nosotros", href: "#nosotros" },
-  { label: "Contacto", href: "#contacto" },
+  { href: "#inicio", label: "Inicio" },
+  { href: "#productos", label: "Productos" },
+  { href: "#nosotros", label: "Nosotros" },
+  { href: "#proceso", label: "Proceso" },
+  { href: "#testimonios", label: "Testimonios" },
+  { href: "#contacto", label: "Contacto" },
 ]
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileOpen, setIsMobileOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-card/80 backdrop-blur-lg">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary overflow-hidden">
-            <img 
-              src="images/logo.png" 
-              alt="Logo" 
-              className="h-full w-full object-cover"
-            />
-          </div>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled
+          ? "bg-background/90 backdrop-blur-xl border-b border-border shadow-lg"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="mx-auto max-w-7xl flex items-center justify-between px-6 py-4">
+        <a href="#inicio" className="flex items-center gap-3 group">
+          <Image
+            src="/images/ksoft-logo.png"
+            alt="KSoft Logo"
+            width={44}
+            height={44}
+            className="transition-transform duration-300 group-hover:scale-110 mix-blend-screen drop-shadow-[0_0_8px_oklch(0.75_0.15_195_/_0.3)]"
+          />
+          <span className="text-xl font-bold font-mono tracking-tight text-foreground">
+            KSoft
+          </span>
+        </a>
 
-          <span className="font-display text-xl font-bold text-foreground">KSoft</span>
-        </Link>
-
-        {/* Desktop nav */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
             >
               {link.label}
-            </Link>
+            </a>
           ))}
-          <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-            <Link
-              href="https://wa.me/573001234567?text=Hola%2C%20me%20interesa%20un%20software%20de%20KSoft"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Cotizar ahora
-            </Link>
-          </Button>
+          <a
+            href="#contacto"
+            className="rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:opacity-90 animate-pulse-glow"
+          >
+            Cotizar Ahora
+          </a>
         </div>
 
-        {/* Mobile menu button */}
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="text-foreground md:hidden"
-          aria-label={isOpen ? "Cerrar menu" : "Abrir menu"}
+          onClick={() => setIsMobileOpen(!isMobileOpen)}
+          className="md:hidden text-foreground p-2"
+          aria-label={isMobileOpen ? "Cerrar menu" : "Abrir menu"}
         >
-          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
-      </nav>
+      </div>
 
-      {/* Mobile nav */}
-      {isOpen && (
-        <div className="border-t border-border bg-card px-6 py-4 md:hidden">
-          <div className="flex flex-col gap-4">
+      {isMobileOpen && (
+        <div className="md:hidden bg-background/95 backdrop-blur-xl border-t border-border animate-fade-in">
+          <div className="flex flex-col px-6 py-4 gap-4">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.href}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                onClick={() => setIsMobileOpen(false)}
+                className="text-muted-foreground hover:text-primary transition-colors py-2"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
-            <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-              <Link
-                href="https://wa.me/573001234567?text=Hola%2C%20me%20interesa%20un%20software%20de%20KSoft"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Cotizar ahora
-              </Link>
-            </Button>
+            <a
+              href="#contacto"
+              onClick={() => setIsMobileOpen(false)}
+              className="rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground text-center"
+            >
+              Cotizar Ahora
+            </a>
           </div>
         </div>
       )}
-    </header>
+    </nav>
   )
 }

@@ -1,76 +1,94 @@
-import Link from "next/link"
+"use client"
+
 import Image from "next/image"
-import { ArrowRight, Code2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ArrowRight, Code2, Cloud, Shield } from "lucide-react"
 
 export function Hero() {
   return (
-    <section id="inicio" className="relative flex min-h-screen items-center overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/images/hero.png"
-          alt=""
-          fill
-          className="object-cover"
-          priority
+    <section
+      id="inicio"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Background grid */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage:
+              "linear-gradient(oklch(0.75 0.15 195) 1px, transparent 1px), linear-gradient(90deg, oklch(0.75 0.15 195) 1px, transparent 1px)",
+            backgroundSize: "60px 60px",
+          }}
         />
-        <div className="absolute inset-0 bg-foreground/80" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-32">
-        <div className="flex max-w-3xl flex-col gap-8">
-          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2">
-            <Code2 className="h-4 w-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Desarrollo de software a la medida</span>
+      {/* Glow orbs */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/5 blur-3xl animate-float" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-accent/5 blur-3xl animate-float animation-delay-500" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 text-center">
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-4 py-1.5 text-sm text-muted-foreground mb-8 animate-fade-up backdrop-blur-sm">
+          <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+          Desarrollo de Software Profesional
+        </div>
+
+        {/* Logo */}
+        <div className="flex justify-center mb-8 animate-fade-up animation-delay-100">
+          <div className="relative w-28 h-28 md:w-36 md:h-36 animate-float">
+            <div className="absolute inset-0 rounded-2xl bg-primary/10 blur-2xl" />
+            <Image
+              src="/images/ksoft-logo.png"
+              alt="KSoft Logo"
+              width={144}
+              height={144}
+              className="relative mix-blend-screen drop-shadow-[0_0_20px_oklch(0.75_0.15_195_/_0.3)]"
+              priority
+            />
           </div>
+        </div>
 
-          <h1 className="font-display text-balance text-4xl font-bold leading-tight tracking-tight text-card md:text-6xl lg:text-7xl">
-            Transformamos tu negocio con tecnologia
-          </h1>
+        {/* Heading */}
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-mono tracking-tight text-foreground mb-6 animate-fade-up animation-delay-200 text-balance">
+          Software que impulsa
+          <span className="block text-primary">tu negocio</span>
+        </h1>
 
-          <p className="max-w-xl text-pretty text-lg leading-relaxed text-card/70 md:text-xl">
-            En KSoft desarrollamos soluciones de software personalizadas que impulsan la productividad y el crecimiento de tu empresa. Desde inventarios hasta facturacion.
-          </p>
+        <p className="mx-auto max-w-2xl text-lg md:text-xl text-muted-foreground mb-10 animate-fade-up animation-delay-300 leading-relaxed text-pretty">
+          En KSoft creamos soluciones digitales a la medida. Desde sistemas de inventario hasta plataformas CRM, transformamos tus ideas en software funcional.
+        </p>
 
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <Link href="#soluciones">
-                Ver soluciones
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-card/20 bg-transparent text-card hover:bg-card/10 hover:text-card"
+        {/* CTA */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up animation-delay-400">
+          <a
+            href="#productos"
+            className="flex items-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-base font-medium text-primary-foreground transition-all duration-300 hover:opacity-90 animate-pulse-glow"
+          >
+            Ver Productos
+            <ArrowRight size={18} />
+          </a>
+          <a
+            href="#contacto"
+            className="flex items-center gap-2 rounded-lg border border-border bg-secondary/50 px-8 py-3.5 text-base font-medium text-foreground transition-all duration-300 hover:bg-secondary backdrop-blur-sm"
+          >
+            Contactar por WhatsApp
+          </a>
+        </div>
+
+        {/* Feature pills */}
+        <div className="mt-16 flex flex-wrap items-center justify-center gap-6 animate-fade-up animation-delay-600">
+          {[
+            { icon: Code2, label: "Codigo Limpio" },
+            { icon: Cloud, label: "Cloud Native" },
+            { icon: Shield, label: "Seguro y Escalable" },
+          ].map((item) => (
+            <div
+              key={item.label}
+              className="flex items-center gap-2 text-sm text-muted-foreground"
             >
-              <Link
-                href="https://wa.me/573001234567?text=Hola%2C%20me%20interesa%20un%20software%20de%20KSoft"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Contactar por WhatsApp
-              </Link>
-            </Button>
-          </div>
-
-          {/* Stats */}
-          <div className="mt-8 grid grid-cols-3 gap-8 border-t border-card/10 pt-8">
-            <div>
-              <p className="font-display text-3xl font-bold text-primary md:text-4xl">50+</p>
-              <p className="mt-1 text-sm text-card/60">Proyectos entregados</p>
+              <item.icon size={16} className="text-primary" />
+              {item.label}
             </div>
-            <div>
-              <p className="font-display text-3xl font-bold text-primary md:text-4xl">98%</p>
-              <p className="mt-1 text-sm text-card/60">Clientes satisfechos</p>
-            </div>
-            <div>
-              <p className="font-display text-3xl font-bold text-primary md:text-4xl">5+</p>
-              <p className="mt-1 text-sm text-card/60">Anos de experiencia</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

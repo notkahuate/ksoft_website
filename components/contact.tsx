@@ -1,143 +1,226 @@
-import Link from "next/link"
-import { MessageCircle, Mail, MapPin, Phone } from "lucide-react"
-import { Button } from "@/components/ui/button"
+"use client"
+
+import { useIntersection } from "@/hooks/use-intersection"
+import { Phone, Mail, MapPin, MessageCircle, Send } from "lucide-react"
 
 export function Contact() {
+  const { ref, isVisible } = useIntersection()
+  const { ref: ref2, isVisible: isVisible2 } = useIntersection()
+
+  const whatsappNumber = "573001234567"
+  const whatsappMessage = encodeURIComponent(
+    "Hola KSoft, estoy interesado en sus servicios de desarrollo de software. Me gustaria recibir mas informacion."
+  )
+
   return (
-    <section id="contacto" className="bg-card py-24">
+    <section id="contacto" className="relative py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-12 lg:grid-cols-2">
-          {/* Left - Info */}
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-              Contacto
-            </p>
-            <h2 className="mt-3 font-display text-balance text-3xl font-bold text-foreground md:text-5xl">
-              Hablemos de tu proyecto
-            </h2>
-            <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">
-              Cuentanos tu idea y te ayudamos a hacerla realidad. Nuestro equipo esta listo para darte la mejor asesoria.
-            </p>
+        {/* Header */}
+        <div ref={ref} className="text-center mb-16">
+          <span
+            className={`inline-block text-sm font-medium text-primary mb-4 ${
+              isVisible ? "animate-fade-up" : "opacity-0"
+            }`}
+          >
+            Contacto
+          </span>
+          <h2
+            className={`text-3xl md:text-5xl font-bold font-mono text-foreground mb-4 text-balance ${
+              isVisible ? "animate-fade-up animation-delay-100" : "opacity-0"
+            }`}
+          >
+            Hablemos de tu proyecto
+          </h2>
+          <p
+            className={`mx-auto max-w-2xl text-muted-foreground leading-relaxed text-pretty ${
+              isVisible ? "animate-fade-up animation-delay-200" : "opacity-0"
+            }`}
+          >
+            Estamos listos para ayudarte a llevar tu negocio al siguiente nivel.
+            Contactanos y recibe una cotizacion personalizada sin compromiso.
+          </p>
+        </div>
 
-            <div className="mt-10 flex flex-col gap-6">
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#25D366]/10">
-                  <MessageCircle className="h-6 w-6 text-[#25D366]" />
+        <div ref={ref2} className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Info */}
+          <div
+            className={`${
+              isVisible2 ? "animate-slide-left" : "opacity-0"
+            }`}
+          >
+            <h3 className="text-xl font-bold font-mono text-foreground mb-6">
+              Informacion de Contacto
+            </h3>
+
+            <div className="flex flex-col gap-6 mb-8">
+              <a
+                href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 group"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#25D366]/10 text-[#25D366] transition-transform duration-300 group-hover:scale-110">
+                  <MessageCircle size={22} />
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-foreground">WhatsApp</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">Escribenos directamente</p>
-                  <Link
-                    href="https://wa.me/573162851135?text=Hola%2C%20me%20interesa%20un%20software%20de%20KSoft"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-1 inline-block text-sm font-medium text-primary hover:underline"
-                  >
-                    +57 316 285 1135
-                  </Link>
+                  <p className="text-sm font-medium text-foreground">WhatsApp</p>
+                  <p className="text-sm text-muted-foreground">
+                    +57 300 123 4567
+                  </p>
                 </div>
-              </div>
+              </a>
 
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                  <Phone className="h-6 w-6 text-primary" />
+              <a
+                href="tel:+573001234567"
+                className="flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 group"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+                  <Phone size={22} />
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-foreground">Telefono</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">Llamanos de lunes a viernes</p>
-                  <Link
-                    href="tel:+573162851135"
-                    className="mt-1 inline-block text-sm font-medium text-primary hover:underline"
-                  >
-                    +57 316 285 1135
-                  </Link>
+                  <p className="text-sm font-medium text-foreground">Telefono</p>
+                  <p className="text-sm text-muted-foreground">
+                    +57 300 123 4567
+                  </p>
                 </div>
-              </div>
+              </a>
 
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                  <Mail className="h-6 w-6 text-primary" />
+              <a
+                href="mailto:contacto@ksoft.dev"
+                className="flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 group"
+              >
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+                  <Mail size={22} />
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-foreground">Email</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">Respondemos en menos de 24 horas</p>
-                  <Link
-                    href="mailto:contacto@ksoft.com"
-                    className="mt-1 inline-block text-sm font-medium text-primary hover:underline"
-                  >
-                    contacto@ksoft.com
-                  </Link>
+                  <p className="text-sm font-medium text-foreground">Email</p>
+                  <p className="text-sm text-muted-foreground">
+                    contacto@ksoft.dev
+                  </p>
                 </div>
-              </div>
+              </a>
 
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-                  <MapPin className="h-6 w-6 text-primary" />
+              <div className="flex items-center gap-4 rounded-xl border border-border bg-card p-5">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <MapPin size={22} />
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-foreground">Ubicacion</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    Colombia - Servicio a toda Latinoamerica
+                  <p className="text-sm font-medium text-foreground">Ubicacion</p>
+                  <p className="text-sm text-muted-foreground">
+                    Colombia - Servicio Remoto Global
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right - CTA Card */}
-          <div className="flex items-center">
-            <div className="w-full overflow-hidden rounded-2xl border border-border bg-background p-8 lg:p-12">
-              <div className="flex flex-col items-center text-center">
-                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[#25D366]">
-                  <MessageCircle className="h-10 w-10 text-[#f0fdf4]" />
-                </div>
-                <h3 className="mt-6 font-display text-2xl font-bold text-foreground">
-                  Escribe por WhatsApp
-                </h3>
-                <p className="mt-3 leading-relaxed text-muted-foreground">
-                  La forma mas rapida de contactarnos. Escribe tu mensaje y te responderemos al instante con toda la informacion que necesitas.
-                </p>
-
-                <Button
-                  asChild
-                  size="lg"
-                  className="mt-8 w-full bg-[#25D366] text-[#f0fdf4] hover:bg-[#20bd5a]"
-                >
-                  <Link
-                    href="https://wa.me/573162851135?text=Hola%2C%20me%20interesa%20un%20software%20de%20KSoft"
-                    target="_blank"
-                    rel="noopener noreferrer"
+          {/* Contact Form */}
+          <div
+            className={`${
+              isVisible2 ? "animate-slide-right" : "opacity-0"
+            }`}
+          >
+            <div className="rounded-xl border border-border bg-card p-6 lg:p-8">
+              <h3 className="text-xl font-bold font-mono text-foreground mb-6">
+                Envia tu Mensaje
+              </h3>
+              <form
+                className="flex flex-col gap-5"
+                onSubmit={(e) => {
+                  e.preventDefault()
+                  const formData = new FormData(e.currentTarget)
+                  const name = formData.get("name")
+                  const email = formData.get("email")
+                  const service = formData.get("service")
+                  const message = formData.get("message")
+                  const waText = encodeURIComponent(
+                    `Hola KSoft! Soy ${name} (${email}). Estoy interesado en: ${service}. ${message}`
+                  )
+                  window.open(
+                    `https://wa.me/${whatsappNumber}?text=${waText}`,
+                    "_blank"
+                  )
+                }}
+              >
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-foreground mb-1.5"
                   >
-                    <MessageCircle className="mr-2 h-5 w-5" />
-                    Iniciar conversacion
-                  </Link>
-                </Button>
-
-                <p className="mt-4 text-xs text-muted-foreground">
-                  Respuesta promedio: menos de 5 minutos
-                </p>
-
-                <div className="mt-8 w-full border-t border-border pt-8">
-                  <p className="text-sm font-medium text-foreground">
-                    Tambien puedes solicitar:
-                  </p>
-                  <div className="mt-4 flex flex-wrap justify-center gap-2">
-                    {[
-                      "Demo gratuita",
-                      "Cotizacion",
-                      "Asesoria",
-                      "Soporte",
-                    ].map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-muted-foreground"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
+                    Nombre Completo
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    placeholder="Tu nombre"
+                    className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  />
                 </div>
-              </div>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-foreground mb-1.5"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="tu@email.com"
+                    className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="service"
+                    className="block text-sm font-medium text-foreground mb-1.5"
+                  >
+                    Servicio de Interes
+                  </label>
+                  <select
+                    id="service"
+                    name="service"
+                    required
+                    className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  >
+                    <option value="">Selecciona un servicio</option>
+                    <option value="inventario">Sistema de Inventario</option>
+                    <option value="citas">Agendamiento de Citas</option>
+                    <option value="web">Pagina Web</option>
+                    <option value="crm">Software + CRM</option>
+                    <option value="facturacion">Facturacion Electronica</option>
+                    <option value="contabilidad">Contabilidad y Reportes</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-foreground mb-1.5"
+                  >
+                    Mensaje
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={4}
+                    required
+                    placeholder="Cuentanos sobre tu proyecto..."
+                    className="w-full rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground transition-all duration-300 hover:opacity-90 animate-pulse-glow"
+                >
+                  <Send size={16} />
+                  Enviar por WhatsApp
+                </button>
+              </form>
             </div>
           </div>
         </div>
