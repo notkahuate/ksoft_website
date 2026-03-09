@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: 'KSoft | Desarrollo de Software a la Medida',
   description: 'KSoft es una empresa de desarrollo de software especializada en sistemas de inventario, agendamiento de citas, CRM, facturacion y paginas web.',
   keywords: ['software', 'desarrollo', 'inventario', 'CRM', 'facturacion', 'agendamiento', 'KSoft'],
+  icons: {
+    icon: 'images/ksoft-logo.png',
+  },
 }
 
 export const viewport: Viewport = {
