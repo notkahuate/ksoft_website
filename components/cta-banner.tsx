@@ -46,7 +46,7 @@ export function CtaBanner() {
           }`}
         >
           <a
-            href="https://wa.me/573001234567"
+            href="https://wa.me/573162851135"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-base font-medium text-primary-foreground transition-all duration-300 hover:opacity-90 animate-pulse-glow"

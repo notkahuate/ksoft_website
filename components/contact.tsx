@@ -7,7 +7,7 @@ export function Contact() {
   const { ref, isVisible } = useIntersection()
   const { ref: ref2, isVisible: isVisible2 } = useIntersection()
 
-  const whatsappNumber = "573001234567"
+  const whatsappNumber = "573162851135"
   const whatsappMessage = encodeURIComponent(
     "Hola KSoft, estoy interesado en sus servicios de desarrollo de software. Me gustaria recibir mas informacion."
   )
@@ -65,7 +65,7 @@ export function Contact() {
                 <div>
                   <p className="text-sm font-medium text-foreground">WhatsApp</p>
                   <p className="text-sm text-muted-foreground">
-                    +57 300 123 4567
+                    +57 316 285 1135
                   </p>
                 </div>
               </a>
