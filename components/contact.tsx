@@ -80,7 +80,7 @@ export function Contact() {
                 <div>
                   <p className="text-sm font-medium text-foreground">Telefono</p>
                   <p className="text-sm text-muted-foreground">
-                    +57 300 123 4567
+                    +57 316 285 1135
                   </p>
                 </div>
               </a>
