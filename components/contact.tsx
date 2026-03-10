@@ -134,7 +134,18 @@ export function Contact() {
                   const service = formData.get("service")
                   const message = formData.get("message")
                   const waText = encodeURIComponent(
-                    `Hola KSoft! Soy ${name} (${email}). Estoy interesado en: ${service}. ${message}`
+                    `👋 Hola KSoft!
+
+                      📌 *Nueva solicitud desde la página web*
+
+                      👤 *Nombre:* ${name}
+                      📧 *Email:* ${email}
+                      🛠️ *Servicio de interés:* ${service}
+
+                      💬 *Mensaje:*
+                      ${message}
+
+                      🚀 Quedo atento a su respuesta. ¡Muchas gracias!`
                   )
                   window.open(
                     `https://wa.me/${whatsappNumber}?text=${waText}`,
