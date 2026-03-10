@@ -133,24 +133,25 @@ export function Contact() {
                   const email = formData.get("email")
                   const service = formData.get("service")
                   const message = formData.get("message")
-                  const waText = encodeURIComponent(
-                    `👋 Hola KSoft!
+                 
+                  const text = [
+                    "Hola KSoft!",
+                    "",
+                    "*Nueva solicitud desde la página web*",
+                    "",
+                    "*Nombre:* " + name,
+                    "*Email:* " + email,
+                    "*Servicio de interés:* " + service,
+                    "",
+                    "*Mensaje:*",
+                    message,
+                    "",
+                    "Quedo atento a su respuesta. Muchas gracias."
+                  ].join("\n")
 
-                      📌 *Nueva solicitud desde la página web*
+                  const waText = encodeURIComponent(text)
 
-                      👤 *Nombre:* ${name}
-                      📧 *Email:* ${email}
-                      🛠️ *Servicio de interés:* ${service}
-
-                      💬 *Mensaje:*
-                      ${message}
-
-                      🚀 Quedo atento a su respuesta. ¡Muchas gracias!`
-                  )
-                  window.open(
-                    `https://wa.me/${whatsappNumber}?text=${waText}`,
-                    "_blank"
-                  )
+                  window.open(`https://wa.me/${whatsappNumber}?text=${waText}`, "_blank")
                 }}
               >
                 <div>
